@@ -6,11 +6,28 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
+    <style>
+      *{
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        outline: 0px;
+        box-sizing: border-box;
+      }
+
+      html, body{
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+      }
+
+    </style>
+
   </head>
 
   <body>
-
-  <div class="col s12 container">
+  <div class="container" id="body-wrapper">
+  <div class="col s12 ">
     <h2 class="header">Groups</h2>
     <div class="card waves-effect waves-teal">
       <div class="card-stacked waves-effect waves-purple">
@@ -20,8 +37,20 @@
       </div>
     </div>
   </div>
-
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  </div>
+  
+  <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
   
   </body>
