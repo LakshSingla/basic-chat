@@ -17,6 +17,7 @@
         height: 100%;
         width: 100%;
         overflow-x: hidden;
+        padding-bottom: 25px;
       }
       #body-wrapper{
         height: 100vh;
@@ -30,17 +31,37 @@
       .avatar-wrapper{
         width: 25%;
         /* height: 25%; */
-
-        padding: 5px 10px;
+        padding: 3px 3px 0.75px 3px;
+        border-radius: 5px;
+        transition: border 0.2s;
       }
       .avatar-wrapper img{
         width: 100%;
+        border-radius: 5px; 
       }
+
+      .action-btn{
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+        /* height: 18px;  */
+        /* margin-bottom: 10px; */
+      }
+      /* #current-highlighter{
+        border: 1px solid black;
+        width: 25%;
+        opacity: 0;
+      } */
 
       @media (max-width: 650px){
         .avatar-wrapper{
           width: 50%;
         }
+        /* #current-highlighter{
+          width: calc(50% + 1.5px);
+          position: absolute;
+        } */
       }
     </style>
   </head>
@@ -57,6 +78,10 @@
       <div class="avatar-wrapper"><img src="img/avatars/08.jpg" alt=""></div>
       <div class="avatar-wrapper"><img src="img/avatars/09.jpg" alt=""></div>
       <div class="avatar-wrapper"><img src="img/avatars/10.jpg" alt=""></div> -->
+      <div id="current-highlighter"></div>
+      <!-- <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+      </button> -->
     </div>
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -64,7 +89,9 @@
     <script>
       const NO_OF_IMGS = 60;
       const DIR = 'img/avatars';
+      let active = null;
       const bodyWrapper = document.getElementById('body-wrapper');
+      // const currentHighlighter = document.getElementById('current-highlighter');
       for(let i = 1; i <= NO_OF_IMGS; i++){
         let wrapper = document.createElement('div');
         let img     = document.createElement('img');
@@ -73,6 +100,34 @@
         img.setAttribute('src', `${DIR}/${paddedImgName}.jpg`);
         wrapper.appendChild(img);
         bodyWrapper.appendChild(wrapper);
+      }
+      let btn = document.createElement('button');
+      btn.className = "btn waves-effect waves-light action-btn";
+      btn.setAttribute('type', 'submit');
+      btn.setAttribute('name', 'action');
+      btn.textContent = 'Start!';
+      let i = document.createElement('i');
+      i.className = 'material-icons right';
+      i.textContent = 'send';
+      btn.appendChild(i);
+      bodyWrapper.appendChild(btn);
+      const avatarWrappers = document.getElementsByClassName('avatar-wrapper');
+      // window.onresize = function(){
+      //   currentHighlighter.style.height = avatarWrappers[0].getBoundingClientRect().height;
+      // }
+      // currentHighlighter.style.height = avatarWrappers[0].getBoundingClientRect().height;
+      for(let i = 0; i < NO_OF_IMGS; i++){
+        avatarWrappers[i].addEventListener('click', function(){
+          if(active !== null){
+            avatarWrappers[active].style.border = '1px solid rgba(0, 0, 0, 0)';
+          }
+          active = i;
+          // console.log('clicked', this);
+          // currentHighlighter.style.top  = avatarWrappers[i].getBoundingClientRect().top;
+          // currentHighlighter.style.left = avatarWrappers[i].getBoundingClientRect().left;
+          // active = i; 
+          this.style.border = '1px solid rgba(0, 0, 0, 1)';
+        });
       }
     </script>
 
