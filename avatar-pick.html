@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      *{
+        margin: 0px; 
+        border: 0px;
+        outline: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html, body{
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      #body-wrapper{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 30px;
+        flex-wrap: wrap;
+      }
+      .avatar-wrapper{
+        width: 25%;
+        /* height: 25%; */
+
+        padding: 5px 10px;
+      }
+      .avatar-wrapper img{
+        width: 100%;
+      }
+
+      @media (max-width: 650px){
+        .avatar-wrapper{
+          width: 50%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="body-wrapper">
+      <!-- <div class="avatar-wrapper"><img src="img/avatars/01.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/02.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/03.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/04.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/05.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/06.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/07.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/08.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/09.jpg" alt=""></div>
+      <div class="avatar-wrapper"><img src="img/avatars/10.jpg" alt=""></div> -->
+    </div>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    
+    <script>
+      const NO_OF_IMGS = 60;
+      const DIR = 'img/avatars';
+      const bodyWrapper = document.getElementById('body-wrapper');
+      for(let i = 1; i <= NO_OF_IMGS; i++){
+        let wrapper = document.createElement('div');
+        let img     = document.createElement('img');
+        let paddedImgName = String(i).length < 2 ? '0' + i : i ;
+        wrapper.classList.add('avatar-wrapper');
+        img.setAttribute('src', `${DIR}/${paddedImgName}.jpg`);
+        wrapper.appendChild(img);
+        bodyWrapper.appendChild(wrapper);
+      }
+    </script>
+
+  </body>
+</html>
