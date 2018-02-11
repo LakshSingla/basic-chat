@@ -48,10 +48,24 @@
       }
       
       .input-msg-wrapper{
-        position: fixed;
+         /* position: fixed; */
         bottom: 2px;
         background-color: white;
+        height: 65px;
+        
         /* width: 50vw; */
+      }
+
+      textarea.materialize-textarea{
+        padding: none !important;
+        resize: none;
+      }
+
+      .submit-msg{
+        position: relative;
+        height: 50px;
+        width: 50px;
+        border-radius: 1000px;
       }
       
 
@@ -97,13 +111,15 @@
             
       </ul>  
       <div class="row">
-          <form class="col s12">
+          <form class="col s12 input-msg-wrapper">
             <div class="row valign-wrapper">
               <div class="input-field col s11">
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <textarea id="textarea1" class="materialize-textarea" autofocus></textarea>
                 <label for="textarea1">Enter a message</label>
               </div>
-              <button class="btn waves-effect waves-light col s1" type="submit" name="action">
+              <button class="btn waves-effect waves-light col s1 submit-msg " 
+                      style="width: 50px; position: relative; bottom: 4px;"
+                      type="submit" name="action">
                   <i class="material-icons right">send</i>
               </button>
             </div>
@@ -115,6 +131,11 @@
 
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-  
+    
+    <script>
+      textarea1 = document.getElementById('textarea-1');
+      textarea1.style.padding = "none !important";
+    </script>
+
   </body>
 </html>
