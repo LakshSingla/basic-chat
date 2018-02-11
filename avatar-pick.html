@@ -13,12 +13,14 @@
         padding: 0px;
         box-sizing: border-box;
       }
+
       html, body{
         height: 100%;
         width: 100%;
         overflow-x: hidden;
         padding-bottom: 25px;
       }
+
       #body-wrapper{
         height: 100vh;
         width: 100vw;
@@ -28,6 +30,7 @@
         padding: 30px;
         flex-wrap: wrap;
       }
+
       .avatar-wrapper{
         width: 25%;
         /* height: 25%; */
@@ -37,6 +40,7 @@
         /* border-width: 3px; */
         transition: border 0.2s;
       }
+
       .avatar-wrapper img{
         width: 100%;
         border-radius: 5px; 
@@ -46,17 +50,18 @@
         margin-top: 15px;
         margin-left: auto;
         margin-right: auto;
-        width: 25%;
+        width: 50%;
         /* height: 18px;  */
         /* margin-bottom: 10px; */
       }
+
       /* #current-highlighter{
         border: 1px solid black;
         width: 25%;
         opacity: 0;
       } */
 
-      @media (max-width: 650px){
+      @media screen and (max-width: 650px){
         .avatar-wrapper{
           width: 50%;
         }
@@ -64,6 +69,12 @@
           width: calc(50% + 1.5px);
           position: absolute;
         } */
+      }
+
+      @media screen and (max-width: 480px) {
+        .action-btn{
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -89,11 +100,13 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     
     <script>
+
       const NO_OF_IMGS = 60;
       const DIR = 'img/avatars';
       let active = null;
       const bodyWrapper = document.getElementById('body-wrapper');
       // const currentHighlighter = document.getElementById('current-highlighter');
+      
       for(let i = 1; i <= NO_OF_IMGS; i++){
         let wrapper = document.createElement('div');
         let img     = document.createElement('img');
@@ -103,6 +116,7 @@
         wrapper.appendChild(img);
         bodyWrapper.appendChild(wrapper);
       }
+      
       let btn = document.createElement('button');
       btn.className = "btn waves-effect waves-light action-btn";
       btn.setAttribute('type', 'submit');
@@ -113,6 +127,7 @@
       i.textContent = 'send';
       btn.appendChild(i);
       bodyWrapper.appendChild(btn);
+      
       const avatarWrappers = document.getElementsByClassName('avatar-wrapper');
       // window.onresize = function(){
       //   currentHighlighter.style.height = avatarWrappers[0].getBoundingClientRect().height;
@@ -131,6 +146,7 @@
           this.style.border = '3px solid rgba(38, 166, 154, 1)';
         });
       }
+
     </script>
 
   </body>
