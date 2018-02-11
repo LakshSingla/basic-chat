@@ -46,7 +46,13 @@
       .msg-you{
         align-self: flex-start;
       }
-
+      
+      .input-msg-wrapper{
+        position: fixed;
+        bottom: 2px;
+        background-color: white;
+        /* width: 50vw; */
+      }
       
 
     </style>
@@ -54,7 +60,7 @@
 
   <body>
     <div id="body-wrapper container">
-    <div class="container">
+    <div class="container ">
       <h2 class="header" >Group name</h2>
       <ul class="collection" >
           <li class="z-depth-2 collection-item avatar msg msg-me">
@@ -68,29 +74,42 @@
                 <span class="title">John Doe</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
                  <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-              </li>
-              <li class="z-depth-2 collection-item avatar msg msg-you">
-                  <img src="img/avatars/01.jpg" alt="" class="circle">
-                  <span class="title">John Doe</span>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-you">
+              <img src="img/avatars/01.jpg" alt="" class="circle">
+              <span class="title">John Doe</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
                    <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-                </li>
-                <li class="z-depth-2 collection-item avatar msg msg-you">
-                    <img src="img/avatars/01.jpg" alt="" class="circle">
-                    <span class="title">John Doe</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-you">
+             <img src="img/avatars/01.jpg" alt="" class="circle">
+             <span class="title">John Doe</span>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
                      <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-                  </li>
-                  <li class="z-depth-2 collection-item avatar msg msg-me">
-                      <img src="img/avatars/01.jpg" alt="" class="circle">
-                      <span class="title">John Doe</span>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-me">
+              <img src="img/avatars/01.jpg" alt="" class="circle">
+              <span class="title">John Doe</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
                     <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-                    </li>
-                                          
-          
-                  
+            </li> 
+            
+            
       </ul>  
+      <div class="row">
+          <form class="col s12">
+            <div class="row valign-wrapper">
+              <div class="input-field col s11">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Enter a message</label>
+              </div>
+              <button class="btn waves-effect waves-light col s1" type="submit" name="action">
+                  <i class="material-icons right">send</i>
+              </button>
+            </div>
+            
+          </form>
+        </div>
     </div>  
     </div>
 
