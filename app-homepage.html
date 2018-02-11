@@ -21,6 +21,9 @@
         overflow-x: hidden;
       }
 
+      .staggered-group-item{
+        opacity: 0;
+      }
     </style>
 
   </head>
@@ -29,17 +32,49 @@
   <div class="container" id="body-wrapper">
   <div class="col s12 ">
     <h2 class="header">Groups</h2>
-    <div class="card waves-effect waves-teal">
-      <div class="card-stacked waves-effect waves-purple">
-        <div class="card-content waves-effect waves-purple">
-          <p>I am a very simple card. I am good at containing small bits of information.</p>
-        </div>
-      </div>
-    </div>
+    <ul id="staggered-group-list">
+        <li class="staggered-group-item">
+            <div class="card waves-effect waves-teal">
+              <div class="card-stacked waves-effect waves-purple">
+                <div class="card-content waves-effect waves-purple">
+                  <p>I am a very simple card. I am good at containing small bits of information.</p>
+                </div>
+              </div>
+            </div>
+            </li>
+            <li class="staggered-group-item">
+                <div class="card waves-effect waves-teal">
+                  <div class="card-stacked waves-effect waves-purple">
+                    <div class="card-content waves-effect waves-purple">
+                      <p>I am a very simple card. I am good at containing small bits of information.</p>
+                    </div>
+                  </div>
+                </div>
+                </li>
+                <li class="staggered-group-item">
+                    <div class="card waves-effect waves-teal">
+                      <div class="card-stacked waves-effect waves-purple">
+                        <div class="card-content waves-effect waves-purple">
+                          <p>I am a very simple card. I am good at containing small bits of information.</p>
+                        </div>
+                      </div>
+                    </div>
+                    </li>
+                    <li class="staggered-group-item">
+                        <div class="card waves-effect waves-teal">
+                          <div class="card-stacked waves-effect waves-purple">
+                            <div class="card-content waves-effect waves-purple">
+                              <p>I am a very simple card. I am good at containing small bits of information.</p>
+                            </div>
+                          </div>
+                        </div>
+                        </li>
+                                                            
+    </ul>
   </div>
   </div>
   
-  <div class="fixed-action-btn">
+  <div class="fixed-action-btn click-to-toggle">
       <a class="btn-floating btn-large red">
         <i class="large material-icons">mode_edit</i>
       </a>
@@ -50,8 +85,13 @@
         <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
       </ul>
     </div>
+
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-  
+    
+    <script>
+      window.onload = Materialize.showStaggeredList('#staggered-group-list')
+    </script>
+
   </body>
 </html>
