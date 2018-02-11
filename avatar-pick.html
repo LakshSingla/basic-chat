@@ -33,6 +33,8 @@
         /* height: 25%; */
         padding: 3px 3px 0.75px 3px;
         border-radius: 5px;
+        /* border-color: #26A69A; */
+        /* border-width: 3px; */
         transition: border 0.2s;
       }
       .avatar-wrapper img{
@@ -119,14 +121,14 @@
       for(let i = 0; i < NO_OF_IMGS; i++){
         avatarWrappers[i].addEventListener('click', function(){
           if(active !== null){
-            avatarWrappers[active].style.border = '1px solid rgba(0, 0, 0, 0)';
+            avatarWrappers[active].style.border = '0px solid rgba(38, 166, 154, 0)';
           }
           active = i;
           // console.log('clicked', this);
           // currentHighlighter.style.top  = avatarWrappers[i].getBoundingClientRect().top;
           // currentHighlighter.style.left = avatarWrappers[i].getBoundingClientRect().left;
           // active = i; 
-          this.style.border = '1px solid rgba(0, 0, 0, 1)';
+          this.style.border = '3px solid rgba(38, 166, 154, 1)';
         });
       }
     </script>
