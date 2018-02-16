@@ -20,6 +20,16 @@
         height: 100%;
         overflow-x: hidden;
       }
+      
+      h2{
+        position: fixed;
+        z-index: 1000;
+        background-color: white;
+        width: 100%;
+        top: 0;
+        padding: 5px;
+      }
+
       ul{
         display: flex;
         flex-direction: column;
@@ -35,6 +45,8 @@
         border: none;
         padding-bottom: 20px;
         padding-right: 10px;
+        margin-top: 120px;
+        margin-bottom: 45px;
       }
       .collection-item{
         border-bottom: none;
@@ -48,11 +60,11 @@
       }
       
       .input-msg-wrapper{
-         /* position: fixed; */
-        bottom: 2px;
+         position: fixed;
+        bottom: 10px;
         background-color: white;
         height: 65px;
-        
+        /* padding: 10px; */
         /* width: 50vw; */
       }
 
@@ -68,14 +80,34 @@
         border-radius: 1000px;
       }
       
-
+      .margin-fix {
+        position: relative;
+        left: 5px;
+      }
+      #white-blank{
+        z-index: 2;
+        background-color: white;
+        width: 100vw;
+        position: absolute;
+        height: 30px;
+      }
+      #white-blank-2{
+        z-index: 2;
+        background-color: white;
+        width: 100vw;
+        position: absolute;
+        height: 10px;
+        bottom: 0px;
+      }
+      
     </style>
   </head>
 
   <body>
+    <div id="white-blank"></div>
     <div id="body-wrapper container">
     <div class="container ">
-      <h2 class="header" >Group name</h2>
+      <h2 class="header resize-man z-depth-5" >Group name</h2>
       <ul class="collection" >
           <li class="z-depth-2 collection-item avatar msg msg-me">
               <img src="img/avatars/01.jpg" alt="" class="circle">
@@ -111,8 +143,8 @@
             
       </ul>  
       <div class="row">
-          <form class="col s12 input-msg-wrapper">
-            <div class="row valign-wrapper">
+          <form class="col s12 input-msg-wrapper resize-man z-depth-5">
+            <div class="row valign-wrapper margin-fix">
               <div class="input-field col s11">
                 <textarea id="textarea1" class="materialize-textarea" autofocus></textarea>
                 <label for="textarea1">Enter a message</label>
@@ -128,13 +160,23 @@
         </div>
     </div>  
     </div>
-
+    <div id="white-blank-2"></div>
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     
     <script>
-      textarea1 = document.getElementById('textarea-1');
+      textarea1 = document.getElementById('textarea1');
       textarea1.style.padding = "none !important";
+      var resizeMan = document.getElementsByClassName('resize-man');
+      var collection = document.getElementsByTagName('ul')[0];
+      for(var i = 0 ; i < resizeMan.length; i++){ 
+        resizeMan[i].style.width = collection.getBoundingClientRect().width + "px";
+      }
+      window.addEventListener('resize', function() {
+        for(var i = 0 ; i < resizeMan.length; i++){ 
+          resizeMan[i].style.width = collection.getBoundingClientRect().width + "px";
+        }
+      });
     </script>
 
   </body>
