@@ -51,8 +51,12 @@
         margin-left: auto;
         margin-right: auto;
         width: 50%;
-        /* height: 18px;  */
+	position: fixed;	        
+	/* height: 18px;  */
         /* margin-bottom: 10px; */
+	left: 25%;
+	bottom: 15px;
+	
       }
 
       /* #current-highlighter{
@@ -74,6 +78,7 @@
       @media screen and (max-width: 480px) {
         .action-btn{
           width: 100%;
+	  left: 0;
         }
       }
     </style>
@@ -127,7 +132,10 @@
       i.textContent = 'send';
       btn.appendChild(i);
       bodyWrapper.appendChild(btn);
-      
+      //btn.style.position = "fixed";
+      //btn.style.bottom = "15px";      
+      //btn.style.margin = "0 auto";
+      //btn.style.left = 
       const avatarWrappers = document.getElementsByClassName('avatar-wrapper');
       // window.onresize = function(){
       //   currentHighlighter.style.height = avatarWrappers[0].getBoundingClientRect().height;
