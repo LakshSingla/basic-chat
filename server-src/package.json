@@ -1,0 +1,24 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "A basic chat app implementing the use of websockets",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LakshSingla/chat-app.git"
+  },
+  "author": "Laksh Singla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LakshSingla/chat-app/issues"
+  },
+  "homepage": "https://github.com/LakshSingla/chat-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  }
+}
