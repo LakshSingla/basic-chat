@@ -4,6 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import '@/assets/css/materialize.min.css'
+import '@/assets/jquery-3.3.1.js'
+import '@/assets/materialize.min.js'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

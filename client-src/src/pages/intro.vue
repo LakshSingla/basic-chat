@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-    </head>
-    <style>
-        #body-wrapper{
-            height: 100vh;
-            width:  100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1{
-            position: absolute;
-            top: 10px;
-            font-size: 36px;
-        }
-        ul{
-            width: 210px !important;
-            overflow: hidden !important;
-        }
-        li > a{
-            font-size: 9.5px !important;
-        }
-    </style>
-    <body>
-        
-        <h1>CHATTERBOX</h1>
+<template>
+<div id="intro-wrapper">
+<h1>CHATTERBOX</h1>
         <div id="body-wrapper" class="valign-wrapper ">
             <div class="row" >
                 <ul class="tabs tabs-fixed-width tab-demo z-depth-1 col s10" >
@@ -69,16 +38,38 @@
                     <i class="material-icons right">send</i>
                 </button>
             </div>
-        <!-- </div> -->
+</div>  
+</div>  
+</template>
 
-        <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <script>
-            let heading = document.getElementsByTagName('h1')[0];
-            heading.style.left = (document.documentElement.clientWidth - heading.getBoundingClientRect().width)/2 + "px";
-            window.onresize = function(){
-                heading.style.left = (document.documentElement.clientWidth - heading.getBoundingClientRect().width)/2 + "px";
-            }
-        </script>
-    </body>
-</html>
+<script>
+export default {
+  
+}
+</script>
+
+<style scoped>
+#body-wrapper{
+            height: 100vh;
+            width:  100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+h1{
+    position: absolute;
+    top: 10px;
+    font-size: 36px;
+}
+ul{
+    width: 210px !important;
+    overflow: hidden !important;
+}
+li > a{
+    font-size: 9.5px !important;
+}
+
+</style>
+
+
