@@ -1,15 +1,183 @@
 <template>
+<div>
+    <div id="white-blank"></div>
+    <div id="body-wrapper container">
+    <div class="container ">
+      <h2 class="header resize-man z-depth-5" >Group name</h2>
+      <ul class="collection" >
+          <li class="z-depth-2 collection-item avatar msg msg-me">
+              <img src="img/avatars/01.jpg" alt="" class="circle">
+              <span class="title">John Doe</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+            <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-you">
+                <img src="img/avatars/01.jpg" alt="" class="circle">
+                <span class="title">John Doe</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+                 <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-you">
+              <img src="img/avatars/01.jpg" alt="" class="circle">
+              <span class="title">John Doe</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+                   <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-you">
+             <img src="img/avatars/01.jpg" alt="" class="circle">
+             <span class="title">John Doe</span>
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+                     <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li>
+            <li class="z-depth-2 collection-item avatar msg msg-me">
+              <img src="img/avatars/01.jpg" alt="" class="circle">
+              <span class="title">John Doe</span>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, vel aut! Perferendis repellendus incidunt sit omnis error, similique maiores maxime beatae porro velit voluptatum eos provident ea, consectetur dolorem deserunt!</p>
+                    <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li> 
+            
+            
+      </ul>  
+      <div class="row">
+          <form class="col s12 input-msg-wrapper resize-man z-depth-5">
+            <div class="row valign-wrapper margin-fix">
+              <div class="input-field col s11">
+                <textarea id="textarea1" class="materialize-textarea" autofocus></textarea>
+                <label for="textarea1">Enter a message</label>
+              </div>
+              <button class="btn waves-effect waves-light col s1 submit-msg " 
+                      style="width: 50px; position: relative; bottom: 4px;"
+                      type="submit" name="action">
+                  <i class="material-icons right"
+                     style="margin: 0 auto;">send</i>
+              </button>
+            </div>
+            
+          </form>
+        </div>
+    </div>  
+    </div>
+    <div id="white-blank-2"></div>
+</div>
   
 </template>
 
 <script>
 export default {
-  
+    mounted(){
+        textarea1 = document.getElementById('textarea1');
+        textarea1.style.padding = "none !important";
+        var resizeMan = document.getElementsByClassName('resize-man');
+        var collection = document.getElementsByTagName('ul')[0];
+        for(var i = 0 ; i < resizeMan.length; i++){ 
+          resizeMan[i].style.width = collection.getBoundingClientRect().width + "px";
+        }
+        window.addEventListener('resize', function() {
+          for(var i = 0 ; i < resizeMan.length; i++){ 
+            resizeMan[i].style.width = collection.getBoundingClientRect().width + "px";
+          }
+        });
+    }
 }
 </script>
 
 <style scoped>
+/* *{
+        margin: 0px;
+        padding: 0px;
+        outline: 0px;
+        border: 0px;
+        box-sizing: border-box;
+      }
+ */
+      html, body{
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      
+      h2{
+        position: fixed;
+        z-index: 1000;
+        background-color: white;
+        width: 100%;
+        top: 0;
+        padding: 10px;
+        font-size: 36px;
+      }
 
+      ul{
+        display: flex;
+        flex-direction: column;
+      }
+
+      .msg{
+        max-width: 80%;
+        margin-top: 5px !important;
+        border-bottom: none !important;
+        
+      }
+      .collection{
+        border: none;
+        padding-bottom: 20px;
+        padding-right: 10px;
+        margin-top: 120px;
+        margin-bottom: 45px;
+      }
+      .collection-item{
+        border-bottom: none;
+      }
+      .msg-me{
+        align-self: flex-end;
+      }
+
+      .msg-you{
+        align-self: flex-start;
+      }
+      
+      .input-msg-wrapper{
+         position: fixed;
+        bottom: 10px;
+        background-color: white;
+        height: 65px;
+        /* padding: 10px; */
+        /* width: 50vw; */
+      }
+
+      textarea.materialize-textarea{
+        padding: none !important;
+        resize: none;
+      }
+
+      .submit-msg{
+        position: relative;
+        height: 50px;
+        width: 50px;
+        border-radius: 1000px;
+      }
+      
+      .margin-fix {
+        position: relative;
+        left: 5px;
+      }
+      #white-blank{
+        z-index: 2;
+        background-color: white;
+        width: 100vw;
+        /* position: absolute; */
+        position: fixed;
+        height: 30px;
+        top: 0px;
+      }
+      #white-blank-2{
+        z-index: 2;
+        background-color: white;
+        width: 100vw;
+        /* position: absolute; */
+        position: fixed;
+        height: 10px;
+        bottom: 0px;
+      }
 </style>
 
 
