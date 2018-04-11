@@ -1,6 +1,6 @@
 <template>
 <div id="intro-wrapper">
-<h1>CHATTERBOX</h1>
+<!-- <h1>CHATTERBOX</h1> -->
         <div id="body-wrapper" class="valign-wrapper ">
             <div class="row" >
                 <ul class="tabs tabs-fixed-width tab-demo z-depth-1 col s10" >
@@ -17,8 +17,7 @@
                     <label for="password">Password</label>
                     <input id="password" class="validate" type="password">
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
+                <button class="btn waves-effect waves-light" type="submit" name="action">LOGIN
                 </button>
             </div>
             <div id="register">
@@ -34,7 +33,7 @@
                     <label for="password">Password</label>
                     <input id="password" class="validate" type="password">
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light" type="submit" name="action">REGISTER
                     <i class="material-icons right">send</i>
                 </button>
             </div>
@@ -44,7 +43,18 @@
 
 <script>
 export default {
-  
+    data(){
+        return {
+
+        }
+    },
+    mounted(){
+        // let heading = document.getElementsByTagName('h1')[0];
+        // heading.style.left = (document.documentElement.clientWidth - heading.getBoundingClientRect().width)/2 + "px";
+        // window.onresize = function(){
+            // heading.style.left = (document.documentElement.clientWidth - heading.getBoundingClientRect().width)/2 + "px";
+        // }
+    }
 }
 </script>
 
