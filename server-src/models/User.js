@@ -6,7 +6,7 @@ const Group = require('./Group');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name : {
+    nick : {
         type: String,
         required : true
     }, 
@@ -16,7 +16,7 @@ const userSchema = new Schema({
     },
     memberOfGroups : [{
         type : Schema.Types.ObjectId , 
-        ref : 'Group'
+        ref : 'Group',
     }]
 });
 
