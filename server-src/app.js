@@ -11,7 +11,13 @@ const authRouters = require('./routes/user-authentication');
 //CONFIGURING FOR THE SERVER
 const app = express();
 
-mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`);
+mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`)
+        .then( () => {
+            console.log(`Connected to DB ${config.DB_URI}/${config.DB_NAME}`);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 
 //REQUIRED MIDDLEWARE
 app.use(bodyParser.json());

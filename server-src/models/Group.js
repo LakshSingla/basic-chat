@@ -5,6 +5,6 @@ const Message = require('./Message');
 
 const Schema = mongoose.Schema;
 
-const groupSchema = new Schema({
+const GroupSchema = new Schema({
 
 });
