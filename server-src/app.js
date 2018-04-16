@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 //IMPORTING USER FILES
 const config = require('./config');
 const authRouters = require('./routes/user-authentication');
+const protectedRoutes = require('./controllers/route-protection');
 
 //CONFIGURING FOR THE SERVER
 const app = express();
@@ -23,6 +24,10 @@ mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`)
 app.use(bodyParser.json());
 
 app.use('/', authRouters);
+
+app.use('/test', (req, res, next) => next());
+
+app.use(protectedRoutes);
 
 // app.get('/', (req, res) => res.send('Got a GET request at /'));
 

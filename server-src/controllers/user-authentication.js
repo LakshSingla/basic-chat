@@ -35,7 +35,9 @@ module.exports = {
     }, 
     login(req, res){
         const body = req.body;
-        if(!basicUtils.hasProperties(body, ['nick', 'password'])) res.send('Incomplete Parameters');
+        if(!basicUtils.hasProperties(body, ['nick', 'password'])) {
+            res.send('Incomplete Parameters');
+        }
         User.findOne({
             nick: body.nick
         }, 'password').then(doc =>{
@@ -48,7 +50,7 @@ module.exports = {
                         // res.send('Good boy, sent the correct password');
                         jwtUtils.genJWT({
                             id: doc._id.toString(),
-                        }, "24h").then(
+                        }, config.JWT_EXP).then(
                             token => {
                                 res.status(200).send({
                                     responseCode : "log0", 
