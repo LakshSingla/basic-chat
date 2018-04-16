@@ -25,9 +25,8 @@ app.use(bodyParser.json());
 
 app.use('/', authRouters);
 
-app.use('/test', (req, res, next) => next());
-
 app.use(protectedRoutes);
+
 
 // app.get('/', (req, res) => res.send('Got a GET request at /'));
 

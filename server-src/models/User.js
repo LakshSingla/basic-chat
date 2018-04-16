@@ -28,11 +28,11 @@ UserSchema.pre('save', function(next){
     }
 
     bcrypt.hash(user.password, config.SALT_ROUNDS)
-          .then( (hash) => {
+          .then(hash => {
               user.password = hash;
               return next();
           })
-          .catch( (err) => next(err));
+          .catch(err => next(err));
 
 });
 
