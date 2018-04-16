@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const config = require('../config');
-const basicUtils = require('../utils/basicUtils.js');
+const basicUtils = require('../utils/basicUtils');
+const jwtUtils = require('../utils/jwtUtils');
 
 module.exports = {
     register(req, res){
@@ -34,7 +35,7 @@ module.exports = {
     }, 
     login(req, res){
         const body = req.body;
-        if(!basicUtils.hasProperties(body, ['nick', 'password']))
+        if(!basicUtils.hasProperties(body, ['nick', 'password'])) res.send('Incomplete Parameters');
         User.findOne({
             nick: body.nick
         }, 'password').then(doc =>{
@@ -45,10 +46,41 @@ module.exports = {
                 bcrypt.compare(body.password, doc.password).then( hashResult => {
                     if(hashResult){
                         // res.send('Good boy, sent the correct password');
-                                                
+                        jwtUtils.genJWT({
+                            id: doc._id.toString(),
+                        }, "24h").then(
+                            token => {
+                                res.status(200).send({
+                                    responseCode : "log0", 
+                                    responseBody : {
+                                        token,
+                                        issuedAt : Date.now()
+                                    }
+                                });
+                            }
+                        ).catch( err => {
+                            //Error in generating the JWT
+                            console.log(err);
+                        });
+                        // resObj = {
+                        //     responseCode : "log0", 
+                        //     responseBody : {
+                        //         userToken: jwtUtils.genJWT({id : doc._id.toString()}, "24h"), 
+                        //         issuedAt : Date.now()
+                        //     }
+                        // };
+                        // res.status(200).send({
+                        //     responseCode : "log0", 
+                        //     responseBody : {
+                        //         userToken: jwtUtils.genJWT({id : doc._id.toString()}, "24h"), 
+                        //         issuedAt : Date.now()
+                        //     }
+                        // });
+                        // console.log(resObj);
+                        // res.status(200).send(resObj);
                     } 
                     else {
-                        // res.send('Gimme the correct password you shitfuck');
+                        res.send('Gimme the correct password you shitfuck');
                     }
                 }).catch( err => console.log(err))
             }
