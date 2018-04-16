@@ -1,4 +1,4 @@
-const utils = require('../utils');
+const utils = require('../../utils/basicUtils.js');
 
 describe('utils.js has', function(){
     it('hasProperties() function which expects atleast all the keys in the props <array> to be in the obj <object>', function() {
