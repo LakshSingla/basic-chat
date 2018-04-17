@@ -43,6 +43,7 @@ module.exports = {
         }, 'password').then(doc =>{
             if(!doc){
                 //User doesnot exist
+                res.send('User does not exist');
             }
             else {
                 bcrypt.compare(body.password, doc.password).then( hashResult => {

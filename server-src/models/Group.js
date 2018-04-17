@@ -21,6 +21,11 @@ const GroupSchema = new Schema({
         required : true, 
         default : Date.now()
     }, 
+    createdBy : {
+        type : Schema.Types.ObjectId, 
+        required : true, 
+        ref : 'User'
+    },
     messages : [{
         type : Schema.Types.ObjectId,
         required : true,
@@ -38,7 +43,7 @@ GroupSchema.pre('save', function(next){
     if(!group.isModified('password')) {
         return next();
     }
-    bcrypt.hash(user.password, config.SALT_ROUNDS)
+    bcrypt.hash(group.password, config.SALT_ROUNDS)
           .then(hash => {
               group.password = hash;
               return next();

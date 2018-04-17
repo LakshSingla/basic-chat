@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 //IMPORTING USER FILES
 const config = require('./config');
 const authRouters = require('./routes/user-authentication');
+const groupRouters = require('./routes/group-routers');
 const protectedRoutes = require('./controllers/route-protection');
 
 //CONFIGURING FOR THE SERVER
@@ -26,6 +27,8 @@ app.use(bodyParser.json());
 app.use('/', authRouters);
 
 app.use(protectedRoutes);
+
+app.use('/group', groupRouters);
 
 
 // app.get('/', (req, res) => res.send('Got a GET request at /'));
