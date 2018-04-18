@@ -8,14 +8,16 @@ module.exports = {
         }); 
         return hasAll;
     },
-    pushUnique(arr, val, transform = val => val){
+    pushUnique(arr, val, transform = val => val, eventually = (arr, val) => {}){
+
         console.log(transform(val));
         if(arr.reduce((accumulator, currentVal) => {
                 console.log(transform(currentVal));
                 return (transform(val) === transform(currentVal)) || accumulator
-            }, false)) 
-            throw new Error('It already contains that value');
-
-        arr.push(val);
+            }, false)){
+                throw new Error('It already contains that value');
+            }
+            eventually(arr, val);
+        // arr.push(val);
     }
 }

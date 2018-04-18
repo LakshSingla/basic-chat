@@ -20,19 +20,19 @@ describe('utils.js has', function(){
     it('pushUnique() function which pushes a value onto an array only if it is not present there', function(){
         this.newArray = [];
         try{
-            utils.pushUnique(this.newArray, 5);
-            utils.pushUnique(this.newArray, 5);
-            utils.pushUnique(this.newArray, 5);
-            utils.pushUnique(this.newArray, 5);
-            utils.pushUnique(this.newArray, 5);
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
         }catch(err){
             // console.log(err);
         }
         expect(this.newArray.length).toBe(1);
-        utils.pushUnique(this.newArray, 6);
+        utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));
         expect(this.newArray.length).toBe(2);
         try{
-        utils.pushUnique(this.newArray, 6);
+        utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));
         }catch(err){
             // console.log(err);
         }
