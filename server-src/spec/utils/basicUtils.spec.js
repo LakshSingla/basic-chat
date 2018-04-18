@@ -15,5 +15,27 @@ describe('utils.js has', function(){
 
         //Tests for properties defined on the prototype chain in the object
         expect(utils.hasProperties(dummyObj, ['foo', 'bar', 'lambda'])).not.toBe(true);
+    });
+
+    it('pushUnique() function which pushes a value onto an array only if it is not present there', function(){
+        this.newArray = [];
+        try{
+            utils.pushUnique(this.newArray, 5);
+            utils.pushUnique(this.newArray, 5);
+            utils.pushUnique(this.newArray, 5);
+            utils.pushUnique(this.newArray, 5);
+            utils.pushUnique(this.newArray, 5);
+        }catch(err){
+            // console.log(err);
+        }
+        expect(this.newArray.length).toBe(1);
+        utils.pushUnique(this.newArray, 6);
+        expect(this.newArray.length).toBe(2);
+        try{
+        utils.pushUnique(this.newArray, 6);
+        }catch(err){
+            // console.log(err);
+        }
+        expect(this.newArray.length).toBe(2);
     })
 });
