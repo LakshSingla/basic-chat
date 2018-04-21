@@ -70,28 +70,63 @@ module.exports = {
     leaveGroup(req, res){
         body = req.body;
         const groupID = req.params.gid;
-        Group.findById(groupID)
+        Group.findByIdAndUpdate(groupID, {
+            $pullAll : {
+                users : [mongoose.Types.ObjectId(req.userID)]
+            }
+        })
             .then(doc => {
                 if(!doc) {
                     return res.send('Given group not found');
                 }
-                try{
-                    if(basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID))){
-                        res.send('User already not present in the group');
-                    }
-                }catch(err) {
-                    console.log(err);
-                    doc.users.splice(doc.users.map(
-                        val => JSON.stringify(val)
-                    )
-                    .indexOf(body.userID), 1);
-                    res.send(doc);
-                }
+                // try{
+                //     if(basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID))){
+                //         res.send('User already not present in the group');
+                //     }
+                // }catch(err) {
+                //     console.log(err);
+                //     doc.users.splice(doc.users.map(
+                //         val => JSON.stringify(val)
+                //     )
+                //     .indexOf(body.userID), 1);
+                //     res.send(doc);
+                // }
+                // console.log(doc);
+                // console.log(body.userID);
+                // const indexOfUser = doc.users.map(val => {
+                    // console.log('***************');
+                    // console.log(val);
+                    // return JSON.stringify(val)
+                // }).indexOf(`${body.userID}`);
+                // console.log(indexOfUser);
+                // if(indexOfUser === -1 ) {
+                    // return res.send('User already doesnot exist in the group');
+                // }
+
+                // console.log('Before splicing');
+                // console.log(doc);
+
+                // doc.users.splice(indexOfUser, 1);
+
+                // console.log('After splicing');
+                // console.log(doc);
+
+                // doc.save().then(savedDoc => {
+                    // console.log(savedDoc);
+                    // res.send(savedDoc)
+                        // }).catch(err => {
+                                // console.log(err);
+                                // return res.send('Unable to splice the array');
+                            // })
+// 
+                res.send(doc);
+
             })
             .catch(err => {
                 console.log(err);
                 res.send('Unable to query for the group');
             });
+            
    }, 
 
    retrieveChats(req, res){

@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
 
     jwtUtils.decodeJWT(token)
             .then( decoded => {
-                console.log(decoded);
+                // console.log(decoded);
                 req.body.userID = decoded.id;
                 // res.send('Token recieved successfully');
                 return next();
