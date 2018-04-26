@@ -32,7 +32,7 @@ describe('utils.js has', function(){
         utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));
         expect(this.newArray.length).toBe(2);
         try{
-        utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));
         }catch(err){
             // console.log(err);
         }
