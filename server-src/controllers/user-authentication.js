@@ -30,6 +30,12 @@ module.exports = {
                 res.send(doc);
             })
             .catch( err => {
+                try{
+                    if(err.errmsg.indexOf('E11000') !== -1){
+                        return res.send('Nick taken, use a different nick');
+                    };
+                }catch(e){}
+                res.send('Unknown error encountered'); 
                 console.log(err);
             }); 
     }, 

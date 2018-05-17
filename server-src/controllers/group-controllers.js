@@ -26,8 +26,13 @@ module.exports = {
                     res.status(200).send(doc);
                 })
                 .catch(err => {
+                    try{
+                        if(err.errmsg.indexOf('E11000') !== -1){
+                            return res.send('Group name taken, please use a different group name');
+                        }
+                    }catch(e){}
                     console.log(err);
-                    res.send('Failed to create the group');
+                    res.send('Unknown error encountered. Failed to create the group');
                 })
     }, 
 
@@ -72,25 +77,26 @@ module.exports = {
         const body = req.body;
         const groupID = req.params.gid;
         Group.findByIdAndUpdate(groupID, {
-            $pullAll : {
-                users : [mongoose.Types.ObjectId(req.userID)]
+            $pull : {
+                users : mongoose.Types.ObjectId(body.userID)
             }
         })
             .then(doc => {
                 if(!doc) {
                     return res.send('Given group not found');
                 }
+                res.send(doc);
                 // try{
-                //     if(basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID))){
-                //         res.send('User already not present in the group');
-                //     }
+                    // if(basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID)) || true){
+                        // return res.send('User already not present in the group');
+                    // }
                 // }catch(err) {
-                //     console.log(err);
-                //     doc.users.splice(doc.users.map(
-                //         val => JSON.stringify(val)
-                //     )
-                //     .indexOf(body.userID), 1);
-                //     res.send(doc);
+                    // console.log(err);
+                    // doc.users.splice(doc.users.map(
+                        // val => JSON.stringify(val)
+                    // )
+                    // .indexOf(body.userID), 1);
+                    // res.send(doc);
                 // }
                 // console.log(doc);
                 // console.log(body.userID);
@@ -98,17 +104,17 @@ module.exports = {
                     // console.log('***************');
                     // console.log(val);
                     // return JSON.stringify(val)
-                // }).indexOf(`${body.userID}`);
+                // }).indexOf(body.userID);
                 // console.log(indexOfUser);
                 // if(indexOfUser === -1 ) {
                     // return res.send('User already doesnot exist in the group');
                 // }
-
+// 
                 // console.log('Before splicing');
                 // console.log(doc);
-
+// 
                 // doc.users.splice(indexOfUser, 1);
-
+// 
                 // console.log('After splicing');
                 // console.log(doc);
 
@@ -120,8 +126,8 @@ module.exports = {
                                 // return res.send('Unable to splice the array');
                             // })
 // 
-                res.send(doc);
-
+                // res.send(doc);
+// 
             })
             .catch(err => {
                 console.log(err);
@@ -182,7 +188,7 @@ module.exports = {
                                         messages : mongoose.Types.ObjectId(doc._id)
                                     }
                                 }).then( () => res.send('Message successful'))
-                                    .catch(err => console.log(err));
+                                    .catch(err => res.send('Unable to save the message successfully'));
                                 //res.send('Message has been successfully registered');
                             })
                             .catch(err => {

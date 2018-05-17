@@ -10,7 +10,9 @@ const Schema = mongoose.Schema;
 const GroupSchema = new Schema({
     name : {
         type : String, 
-        required : true
+        required : true,
+        unique : true, 
+        dropDups : true
     },
     password : {
         type : String, 
