@@ -80,7 +80,7 @@ module.exports = {
             $pull : {
                 users : mongoose.Types.ObjectId(body.userID)
             }
-        })
+        }, {new : true})
             .then(doc => {
                 if(!doc) {
                     return res.send('Given group not found');
