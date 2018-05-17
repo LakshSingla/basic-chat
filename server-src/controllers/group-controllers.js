@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const User = require('../models/User');
 const Group = require('../models/Group');
 const Message = require('../models/Message');
 const basicUtils = require('../utils/basicUtils');
@@ -23,8 +24,13 @@ module.exports = {
         });        
         newGroup.save()
                 .then(doc => {
-                    res.status(200).send(doc);
+                    return User.findByIdAndUpdate(body.userID, {
+                        $push : {
+                            memberOfGroups : doc._id
+                        }
+                    });
                 })
+                .then(userDoc => res.status(200).send('Group added successfully'))
                 .catch(err => {
                     try{
                         if(err.errmsg.indexOf('E11000') !== -1){
@@ -53,16 +59,24 @@ module.exports = {
                           try{
                             basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID), JSON.stringify, (arr, val) => arr.push(val));
                           }catch(err){
-                            console.log(err);
+                            // console.log(err);
                             return 'User already present in the group';
                           }
                         //   doc.users.push(mongoose.Types.ObjectId(body.userID));
                           return doc.save();
                       })
-                      .then(savedDoc => {
-                          res.send(savedDoc);
+                      .then(groupDoc => {
+                          if(typeof 'groupDoc' === 'string') return res.send('User already present in the group');
+
+                          return User.findByIdAndUpdate(body.UserID, {
+                              $push : { 
+                                  memberOfGroups : groupID
+                              }
+                          }, {new : true})
                       })
-                      .catch(err => {
+                      .then(userDoc => {
+                        res.status(200).send(userDoc);
+                      }).catch(err => {
                           console.log(err);
                           res.send('Unable to hash the password');
                       })
@@ -85,7 +99,6 @@ module.exports = {
                 if(!doc) {
                     return res.send('Given group not found');
                 }
-                res.send(doc);
                 // try{
                     // if(basicUtils.pushUnique(doc.users, mongoose.Types.ObjectId(body.userID)) || true){
                         // return res.send('User already not present in the group');
@@ -127,7 +140,14 @@ module.exports = {
                             // })
 // 
                 // res.send(doc);
-// 
+                return User.findByIdAndUpdate(body.UserID, {
+                    $pull : {
+                        memberOfGroups : GroupID
+                    }
+                }, { new : true})
+            })
+            .then(userDoc => {
+                res.status(200).send('User removed successfully');
             })
             .catch(err => {
                 console.log(err);
