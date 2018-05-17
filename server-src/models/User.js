@@ -15,10 +15,6 @@ const UserSchema = new Schema({
         type : String,
         required : true,
     },
-    memberOfGroups : [{
-        type : Schema.Types.ObjectId , 
-        ref : 'Group',
-    }]
 });
 
 UserSchema.pre('save', function(next){

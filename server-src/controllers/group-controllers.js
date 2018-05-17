@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const Group = require('../models/Group');
+const Message = require('../models/Message');
 const basicUtils = require('../utils/basicUtils');
 
 module.exports = {
@@ -139,12 +140,15 @@ module.exports = {
                     if(!group){
                         return res.send('Group not found');
                     }
-                    else if(group.users
-                                    .map(user => user._id)
+                    /*else if(group.users
+                                    .map(user => JSON.stringify(user._id))
                                     .indexOf(body.userID) === -1) {
                         return res.send('User not in the group. Unable to access the information');
-                    }
+                    }*/
                     else {
+                        console.log('*' * 20);
+                        console.log(group);
+                        console.log('*' * 20);
                         return res.send(group);
                     }
                 })
@@ -153,7 +157,37 @@ module.exports = {
    },
 
    sendChat(req, res){
-       const body = req.body;
-       const groupID = req.params.gid;
+        const body = req.body;
+        const groupID = req.params.gid;
+        if(!basicUtils.hasProperties(body, ['content'])){
+            return res.send('Insufficient parameters present in the request');
+        }
+        Group.findById(groupID)
+                .then(group => {
+                    if(!group){
+                        return res.send('Group not found');
+                    }
+                    if(group.users.indexOf(body.userID) === -1){
+                        return res.send('User not in the group. Unable to send the message');
+                    }
+                    let message = new Message({
+                        sender : body.userID, 
+                        timeSent : Date.now(),
+                        content : body.content
+                    });
+                    message.save()
+                            .then( doc => {
+                                Group.findByIdAndUpdate(groupID, {
+                                    $push: {
+                                        messages : mongoose.Types.ObjectId(doc._id)
+                                    }
+                                }).then( () => res.send('Message successful'))
+                                    .catch(err => console.log(err));
+                                //res.send('Message has been successfully registered');
+                            })
+                            .catch(err => {
+                                res.send('Unable to register the message sucesfully');
+                            });
+                });
    }
 };
