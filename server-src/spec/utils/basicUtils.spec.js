@@ -22,11 +22,9 @@ describe('utils.js has', function(){
         try{
             utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
             utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
-            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
-            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
-            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
+            utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val)); utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val)); utils.pushUnique(this.newArray, 5, val => val, (arr, val) => arr.push(val));
         }catch(err){
-            // console.log(err);
+            //Do something with this error
         }
         expect(this.newArray.length).toBe(1);
         utils.pushUnique(this.newArray, 6, val => val, (arr, val) => arr.push(val));

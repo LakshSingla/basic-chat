@@ -15,4 +15,8 @@ router.get('/:gid/leave', (req, res, next) => {
 
 router.get('/:gid/leave', groupControllers.leaveGroup);
 
+router.get('/:gid/data', groupControllers.retrieveGroupData);
+
+router.post('/:gid/send', groupControllers.sendChat);
+
 module.exports = router;

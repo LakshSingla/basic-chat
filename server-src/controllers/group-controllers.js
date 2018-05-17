@@ -6,7 +6,7 @@ const basicUtils = require('../utils/basicUtils');
 
 module.exports = {
     newGroup(req, res){
-        body = req.body;
+        const body = req.body;
         if(!basicUtils.hasProperties(body, ['name', 'password'])){
             //Set the appropriate status code for such request
             return res.send('Insufficient parameters found');
@@ -31,7 +31,7 @@ module.exports = {
     }, 
 
     joinGroup(req, res){
-        body = req.body;
+        const body = req.body;
         const groupID = req.params.gid;
         console.log(groupID);
         Group.findById(groupID)
@@ -68,7 +68,7 @@ module.exports = {
     },
 
     leaveGroup(req, res){
-        body = req.body;
+        const body = req.body;
         const groupID = req.params.gid;
         Group.findByIdAndUpdate(groupID, {
             $pullAll : {
@@ -129,13 +129,31 @@ module.exports = {
             
    }, 
 
-   retrieveChats(req, res){
-       body = req.body;
-       const groupID = req.params.gid;
+   retrieveGroupData(req, res){
+        const body = req.body;
+        const groupID = req.params.gid;
+        Group.findById(groupID)
+                .populate('messages')
+                .populate('users', '_id nick')
+                .then(group => {
+                    if(!group){
+                        return res.send('Group not found');
+                    }
+                    else if(group.users
+                                    .map(user => user._id)
+                                    .indexOf(body.userID) === -1) {
+                        return res.send('User not in the group. Unable to access the information');
+                    }
+                    else {
+                        return res.send(group);
+                    }
+                })
+                .catch(err => console.log(err)); 
+        
    },
 
-   sendChats(req, res){
-       body = req.body;
+   sendChat(req, res){
+       const body = req.body;
        const groupID = req.params.gid;
    }
 };
