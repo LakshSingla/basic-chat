@@ -4,8 +4,8 @@
         <div id="body-wrapper" class="valign-wrapper ">
             <div class="row" >
                 <ul class="tabs tabs-fixed-width tab-demo z-depth-1 col s10" >
-                    <li class="tab col s3"><a href="#login" :class="{active: isLoginOpened}">Login</a></li>
-                    <li class="tab col s3"><a :class="{active: !isLoginOpened}" href="#register">Register</a></li>
+                    <li class="tab col s3"><a  href="#login">Login</a></li>
+                    <li class="tab col s3"><a class="active" href="#register">Register</a></li>
                 </ul>
             </div>
             <div id="login">
@@ -15,9 +15,11 @@
                 </div>
                 <div class="input-field col s12 center-align">
                     <label for="password">Password</label>
-                    <input id="password" class="validate" type="password">
+                    <input id="password" class="validate" type="password" v-model="logPass">
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">LOGIN
+                <button class="btn waves-effect waves-light" type="submit" name="action" 
+                        @click="login"
+                        :disabled="logDisabled">LOGIN
                 </button>
             </div>
 
@@ -60,18 +62,13 @@ export default {
             regPass : '', 
             regConfirmPass : '',
             logNick: '',
+            logPass: '',
             regDisabled : false, 
-            tabOpened : 'register',
-        }
-    },
-    computed: {
-        isLoginOpened : function(){
-            return this.tabOpened === 'login';
+            logDisabled : false
         }
     },
     methods : {
         register(event){
-
             event.preventDefault();
             if(this.regPass === '' && this.regConfirmPass === '') {
                 M.toast('Please fill out the password');
@@ -95,21 +92,54 @@ export default {
             }).then(response => {
                 this.regDisabled = false;
                 const data = response.data;
+                M.toast(data.message);
                 if(data.code === 'reg0'){
                     this.regNick = ''; 
                     this.regPass = '';
                     this.regConfirmPass = '';
                     this.tabOpened = 'login';
                     this.logNick = data.data.nick;
-                }
-                else{
-                    M.toast(data.message);
+                    
+                    console.log(this.isLoginOpened);
+                    console.log('Hurray');
                 }
             }).catch(err => {
                 this.regDisabled = false;
                 console.log(err);
             });
+        }, 
+
+        login(event){
+            event.preventDefault();
+            if(this.logNick === '' || this.logPass === ''){
+                return M.toast('Please enter the credentials');
+            }
+            else {
+                this.logDisabled = true;
+                const that = this;
+                axios.request({
+                    url : `${CONFIG.API_URI}/login`, 
+                    method : 'post', 
+                    data : {nick : that.logNick, password : that.logPass}, 
+                    headers : {
+                        'Access-Control-Allow-Origin' : '*'
+                    }
+                }).then(response => {
+                    this.logDisabled = false;
+                    const data = response.data; 
+                    if(data.code === 'log0'){
+                        // console.log(data);
+                        localStorage.setItem('BasicChat-JWT', data.token);
+                    }else{
+                        M.toast(data.message);
+                    }
+                }).catch(err => {
+                    this.logDisabled = false;
+                    M.toast('Unable to send the response to the server');
+                });
+            }
         }
+
     },
     mounted(){
         // let heading = document.getElementsByTagName('h1')[0];
