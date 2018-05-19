@@ -24,6 +24,7 @@ mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`)
 
 //REQUIRED MIDDLEWARE
 app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 app.use('/', authRouters);
 

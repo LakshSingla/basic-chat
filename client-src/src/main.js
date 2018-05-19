@@ -6,9 +6,9 @@ import router from './router'
 
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
-import '@/assets/css/materialize.min.css'
-import '@/assets/jquery-3.3.1.js'
-import '@/assets/materialize.min.js'
+import 'materialize-css/dist/css/materialize.min.css';
+import jQuery from 'jquery/dist/jquery.js';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 Vue.config.productionTip = false
 

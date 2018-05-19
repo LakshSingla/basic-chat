@@ -28,17 +28,29 @@ module.exports = {
                         $push : {
                             memberOfGroups : doc._id
                         }
-                    });
+                    }, {new : true});
                 })
-                .then(userDoc => res.status(200).send('Group added successfully'))
+                .then(userDoc => res.status(200).send({
+                    code : 'gpn0', 
+                    message : 'New group created successfully', 
+                    data : { name: body.name, groupID : userDoc.groups[userDoc.groups.length - 1]}
+                }))
                 .catch(err => {
                     try{
                         if(err.errmsg.indexOf('E11000') !== -1){
-                            return res.send('Group name taken, please use a different group name');
+                            return res.send({
+                                code : 'gpn1', 
+                                message : 'Group name already exists, please use a new name', 
+                                data : {}
+                            });
                         }
                     }catch(e){}
                     console.log(err);
-                    res.send('Unknown error encountered. Failed to create the group');
+                    res.send({
+                        code : 'gpn-1', 
+                        message : 'Unknown error encountered while creating the group', 
+                        data : {}
+                    });
                 })
     }, 
 

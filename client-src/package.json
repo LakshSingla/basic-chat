@@ -13,6 +13,8 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "jquery": "^3.3.1",
     "material-design-icons-iconfont": "^3.0.3",
     "materialize-css": "^0.100.2",
     "socket.io-client": "^2.1.0",
