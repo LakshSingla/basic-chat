@@ -4,14 +4,14 @@
         <div id="body-wrapper" class="valign-wrapper ">
             <div class="row" >
                 <ul class="tabs tabs-fixed-width tab-demo z-depth-1 col s10" >
-                    <li class="tab col s3"><a href="#login">Login</a></li>
-                    <li class="tab col s3"><a class="active" href="#register">Register</a></li>
+                    <li class="tab col s3"><a href="#login" :class="{active: isLoginOpened}">Login</a></li>
+                    <li class="tab col s3"><a :class="{active: !isLoginOpened}" href="#register">Register</a></li>
                 </ul>
             </div>
             <div id="login">
                 <div class="input-field col s12 center-align">
                     <label for="last_name">Nick</label>
-                    <input id="last_name" type="text" class="validate">
+                    <input id="last_name" type="text" class="validate" v-model="logNick">
                 </div>
                 <div class="input-field col s12 center-align">
                     <label for="password">Password</label>
@@ -35,7 +35,8 @@
                     <input id="reg-confirm-pass" class="validate" type="password" required v-model="regConfirmPass">
                 </div>
                 <button class="btn waves-effect waves-light" type="submit" name="action" 
-                        @click="register">REGISTER
+                        @click="register"
+                        :disabled="regDisabled">REGISTER
                     <i class="material-icons right">send</i>
                 </button>
             </div>
@@ -52,16 +53,20 @@ import 'materialize-css/dist/css/materialize.min.css';
 import jQuery from 'jquery/dist/jquery.js';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const instance = axios.create({
-    baseURL : CONFIG.API_URI, 
-});
-
 export default {
     data(){
         return {
             regNick : '', 
             regPass : '', 
             regConfirmPass : '',
+            logNick: '',
+            regDisabled : false, 
+            tabOpened : 'register',
+        }
+    },
+    computed: {
+        isLoginOpened : function(){
+            return this.tabOpened === 'login';
         }
     },
     methods : {
@@ -77,15 +82,33 @@ export default {
                 M.toast('The passwords entered donot match');
                 return; 
             }
-
             const that = this;
-            instance.post({
-                method : 'post', 
-                data : {
-                    nick : that.regNick, 
-                    password : that.regPass
-                } 
-            })
+            this.regDisabled = true;
+
+            axios.request({
+                url : `${CONFIG.API_URI}/register`, 
+                method : 'post',
+                data : {nick : that.regNick, password: that.regPass}, 
+                headers : {
+                    'Access-Control-Allow-Origin' : '*'
+                }
+            }).then(response => {
+                this.regDisabled = false;
+                const data = response.data;
+                if(data.code === 'reg0'){
+                    this.regNick = ''; 
+                    this.regPass = '';
+                    this.regConfirmPass = '';
+                    this.tabOpened = 'login';
+                    this.logNick = data.data.nick;
+                }
+                else{
+                    M.toast(data.message);
+                }
+            }).catch(err => {
+                this.regDisabled = false;
+                console.log(err);
+            });
         }
     },
     mounted(){

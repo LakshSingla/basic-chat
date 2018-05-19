@@ -33,7 +33,7 @@ module.exports = {
                 res.send({
                     code : 'reg0',
                     message : 'User registered successfully', 
-                    data : { nick }
+                    data : { nick: body.nick }
                 });
             })
             .catch( err => {

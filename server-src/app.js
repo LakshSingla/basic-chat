@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 //IMPORTING USER FILES
 const config = require('./config');
@@ -23,6 +24,7 @@ mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`)
         });
 
 //REQUIRED MIDDLEWARE
+app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
