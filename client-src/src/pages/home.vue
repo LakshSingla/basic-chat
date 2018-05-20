@@ -42,7 +42,8 @@ export default {
       }
     },
     mounted(){
-        Materialize.showStaggeredList('#staggered-group-list');
+      console.log('Mounted the dom');
+        // setTimeout(() => Materialize.showStaggeredList('#staggered-group-list'), 1 );
     }, 
     components : {
       'group-box' : groupBox,
@@ -64,8 +65,10 @@ export default {
         }).then(response => {
           const data = response.data;
           this.groupList = data.data;
+          console.log('Fetched the data');
+          Materialize.showStaggeredList('#staggered-group-list');
         });
-        setTimeout(() => console.log(that.groupList[0].name), 1000);
+        // setTimeout(() => console.log(that.groupList[0].name), 1000);
       }
     }
 }
@@ -80,9 +83,9 @@ html, body{
   overflow-x: hidden;
 }
 
-.staggered-group-item{
+/* .staggered-group-item{
   opacity: 0;
-}
+} */
 
 </style>
 
