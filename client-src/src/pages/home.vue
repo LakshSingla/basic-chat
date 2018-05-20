@@ -4,7 +4,7 @@
   <div class="col s12 ">
     <h2 class="header">Groups</h2>
     <ul id="staggered-group-list">
-      <group-box v-for="(item, index) in items" :key="index"></group-box>
+      <group-box v-for="(group, index) in groupList" :key="index" :groupName="group.name" :groupID="group._id"></group-box>
     </ul>
   </div>
   </div>
@@ -33,23 +33,12 @@ import CONFIG from '../config';
 import groupBox from '../components/group-box';
 
 export default {
-    beforeRouteEnter(to, from, next){
-      axios.request({
-        method : 'get', 
-        url : `${CONFIG.API_URI}/group/my`, 
-        headers : {
-          'Access-Control-Allow-Origin' : '*', 
-          'x-chat-token' : localStorage.getItem(CONFIG.LOCALSTORAGE_PATH)
-        }
-      }).then(response => {
-        const data = response.data;
-        console.log(response.data);
-        next();
-      });
+    created(){
+      this.fetchData();
     },
     data(){
       return {
-        groupList : []
+        groupList : [],
       }
     },
     mounted(){
@@ -60,8 +49,27 @@ export default {
     }, 
     props: {
 
+    },
+    methods: {
+      fetchData(){
+        console.log('In fetchData');
+        const that = this;
+        axios.request({
+          method : 'get', 
+          url : `${CONFIG.API_URI}/group/my`, 
+          headers : {
+            'Access-Control-Allow-Origin' : '*', 
+            'x-chat-token' : localStorage.getItem(CONFIG.LOCALSTORAGE_PATH)
+          }
+        }).then(response => {
+          const data = response.data;
+          this.groupList = data.data;
+        });
+        setTimeout(() => console.log(that.groupList[0].name), 1000);
+      }
     }
 }
+
 </script>
 
 <style scoped>
