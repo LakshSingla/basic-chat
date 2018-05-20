@@ -12,7 +12,7 @@ module.exports = {
         User.findById(body.userID)
             .populate('memberOfGroups')
             .then(userDoc => {
-               console.log(userDoc);
+            //    console.log(userDoc);
                 if(!userDoc){
                     return res.send({
                         code : 'gpm1', 
@@ -23,7 +23,20 @@ module.exports = {
                 return res.send({
                     code : 'gpm0', 
                     message : 'User groups successfully queried', 
-                    data : {}
+                    data : ( () => {
+                        groupsMutable = JSON.parse(JSON.stringify(userDoc.memberOfGroups));
+                        groupsMutable.forEach(doc => {
+                            delete doc.createdAt; 
+                            delete doc.createdBy; 
+                            delete doc.users; 
+                            delete doc.messages; 
+                            delete doc.password; 
+                            delete doc.createdBy;
+                            delete doc.__v;
+                        }); 
+                        return groupsMutable;
+                        // return 1;
+                    })()
                 });
             })
             .catch(err => {
