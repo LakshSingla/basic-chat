@@ -53,7 +53,7 @@ import CONFIG from '../config';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import jQuery from 'jquery/dist/jquery.js';
-import M from 'materialize-css/dist/js/materialize.min.js';
+import Materialize from 'materialize-css/dist/js/materialize.min.js';
 
 export default {
     data(){
@@ -71,12 +71,12 @@ export default {
         register(event){
             event.preventDefault();
             if(this.regPass === '' && this.regConfirmPass === '') {
-                M.toast('Please fill out the password');
+                Materialize.toast('Please fill out the password');
                 return;
             }
 
             if (this.regPass !== this.regConfirmPass){ 
-                M.toast('The passwords entered donot match');
+                Materialize.toast('The passwords entered donot match');
                 return; 
             }
             const that = this;
@@ -92,7 +92,7 @@ export default {
             }).then(response => {
                 this.regDisabled = false;
                 const data = response.data;
-                M.toast(data.message);
+                Materialize.toast(data.message);
                 if(data.code === 'reg0'){
                     this.regNick = ''; 
                     this.regPass = '';
@@ -105,6 +105,7 @@ export default {
                 }
             }).catch(err => {
                 this.regDisabled = false;
+                Materialize.toast('Unable to send the request to the server');
                 console.log(err);
             });
         }, 
@@ -112,7 +113,7 @@ export default {
         login(event){
             event.preventDefault();
             if(this.logNick === '' || this.logPass === ''){
-                return M.toast('Please enter the credentials');
+                return Materialize.toast('Please enter the credentials');
             }
             else {
                 this.logDisabled = true;
@@ -128,14 +129,14 @@ export default {
                     this.logDisabled = false;
                     const data = response.data; 
                     if(data.code === 'log0'){
-                        // console.log(data);
-                        localStorage.setItem('BasicChat-JWT', data.token);
+                        //console.log(data);
+                        localStorage.setItem(CONFIG.LOCALSTORAGE_PATH, data.token);
                     }else{
-                        M.toast(data.message);
+                        Materialize.toast(data.message);
                     }
                 }).catch(err => {
                     this.logDisabled = false;
-                    M.toast('Unable to send the response to the server');
+                    Materialize.toast('Unable to send the requeest to the server');
                 });
             }
         }
