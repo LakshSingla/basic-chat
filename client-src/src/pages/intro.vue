@@ -103,9 +103,7 @@ export default {
                     this.regConfirmPass = '';
                     this.tabOpened = 'login';
                     this.logNick = data.data.nick;
-                    
-                    console.log(this.isLoginOpened);
-                    console.log('Hurray');
+
                 }
             }).catch(err => {
                 this.regDisabled = false;
@@ -140,7 +138,9 @@ export default {
                     const data = response.data; 
                     if(data.code === 'log0'){
                         //console.log(data);
-                        localStorage.setItem(CONFIG.LOCALSTORAGE_PATH, data.token);
+                        console.log(data.data.token);
+                        localStorage.setItem(CONFIG.LOCALSTORAGE_PATH, data.data.token);
+                        this.$router.push('home');
                     }else{
                         if(this.toast) this.toast.remove();
                         this.toast = Materialize.toast(data.message, 4000);

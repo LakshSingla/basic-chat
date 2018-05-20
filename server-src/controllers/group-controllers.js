@@ -226,9 +226,7 @@ module.exports = {
                         return res.send('User not in the group. Unable to access the information');
                     }*/
                     else {
-                        console.log('*' * 20);
                         console.log(group);
-                        console.log('*' * 20);
                         return res.send(group);
                     }
                 })

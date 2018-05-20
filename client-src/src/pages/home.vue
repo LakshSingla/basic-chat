@@ -4,16 +4,7 @@
   <div class="col s12 ">
     <h2 class="header">Groups</h2>
     <ul id="staggered-group-list">
-        <li class="staggered-group-item">
-            <div class="card waves-effect waves-teal">
-              <div class="card-stacked waves-effect waves-purple">
-                <div class="card-content waves-effect waves-purple">
-                  <p>I am a very simple card. I am good at containing small bits of information.</p>
-                </div>
-              </div>
-            </div>
-            </li>
-            <group-box></group-box>
+      <group-box v-for="(item, index) in items" :key="index"></group-box>
     </ul>
   </div>
   </div>
@@ -36,15 +27,39 @@
 
 <script>
 
+import axios from 'axios';
+
 import CONFIG from '../config';
 import groupBox from '../components/group-box';
 
 export default {
+    beforeRouteEnter(to, from, next){
+      axios.request({
+        method : 'get', 
+        url : `${CONFIG.API_URI}/group/my`, 
+        headers : {
+          'Access-Control-Allow-Origin' : '*', 
+          'x-chat-token' : localStorage.getItem(CONFIG.LOCALSTORAGE_PATH)
+        }
+      }).then(response => {
+        const data = response.data;
+        console.log(response.data);
+        next();
+      });
+    },
+    data(){
+      return {
+        groupList : []
+      }
+    },
     mounted(){
         Materialize.showStaggeredList('#staggered-group-list');
     }, 
     components : {
       'group-box' : groupBox,
+    }, 
+    props: {
+
     }
 }
 </script>
