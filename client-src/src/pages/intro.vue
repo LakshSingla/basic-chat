@@ -53,7 +53,7 @@ import CONFIG from '../config';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import jQuery from 'jquery/dist/jquery.js';
-import Materialize from 'materialize-css/dist/js/materialize.js';
+// import Materialie from 'materialize-css/dist/js/materialize.js';
 
 export default {
     data(){
@@ -73,13 +73,13 @@ export default {
             event.preventDefault();
             if(this.regPass === '' && this.regConfirmPass === '') {
                 if(this.toast) this.toast.remove();
-                this.toast = Materialize.toast('Please fill out the password');
+                this.toast = Materialize.toast('Please fill out the password', 4000);
                 return;
             }
 
             if (this.regPass !== this.regConfirmPass){ 
                 if(this.toast) this.toast.remove();
-                this.toast = Materialize.toast('The passwords entered donot match');
+                this.toast = Materialize.toast('The passwords entered donot match', 4000);
                 return; 
             }
             const that = this;
@@ -96,7 +96,7 @@ export default {
                 this.regDisabled = false;
                 const data = response.data;
                 if(this.toast) this.toast.remove();
-                this.toast = Materialize.toast(data.message);
+                this.toast = Materialize.toast(data.message, 4000);
                 if(data.code === 'reg0'){
                     this.regNick = ''; 
                     this.regPass = '';
@@ -110,7 +110,7 @@ export default {
             }).catch(err => {
                 this.regDisabled = false;
                 if(this.toast) this.toast.remove();
-                this.toast = Materialize.toast('Unable to send the request to the server');
+                this.toast = Materialize.toast('Unable to send the request to the server', 4000);
                 console.log(err);
             });
         }, 
@@ -122,7 +122,7 @@ export default {
                 // const toastInstance = Materialize.Toast.getInstance(toastElement);
                 // toastInstance.dismiss();
                 if(this.toast) this.toast.remove();
-                this.toast = Materialize.toast('Please enter the credentials');
+                this.toast = Materialize.toast('Please enter the credentials', 4000);
                 return;
             }
             else {
@@ -143,12 +143,12 @@ export default {
                         localStorage.setItem(CONFIG.LOCALSTORAGE_PATH, data.token);
                     }else{
                         if(this.toast) this.toast.remove();
-                        Materialize.toast(data.message);
+                        this.toast = Materialize.toast(data.message, 4000);
                     }
                 }).catch(err => {
                     this.logDisabled = false;
                     if(this.toast) this.toast.remove();
-                    Materialize.toast('Unable to send the request to the server');
+                    Materialize.toast('Unable to send the request to the server', 4000);
                 });
             }
         }

@@ -13,34 +13,7 @@
               </div>
             </div>
             </li>
-            <li class="staggered-group-item">
-                <div class="card waves-effect waves-teal">
-                  <div class="card-stacked waves-effect waves-purple">
-                    <div class="card-content waves-effect waves-purple">
-                      <p>I am a very simple card. I am good at containing small bits of information.</p>
-                    </div>
-                  </div>
-                </div>
-                </li>
-                <li class="staggered-group-item">
-                    <div class="card waves-effect waves-teal">
-                      <div class="card-stacked waves-effect waves-purple">
-                        <div class="card-content waves-effect waves-purple">
-                          <p>I am a very simple card. I am good at containing small bits of information.</p>
-                        </div>
-                      </div>
-                    </div>
-                    </li>
-                    <li class="staggered-group-item">
-                        <div class="card waves-effect waves-teal">
-                          <div class="card-stacked waves-effect waves-purple">
-                            <div class="card-content waves-effect waves-purple">
-                              <p>I am a very simple card. I am good at containing small bits of information.</p>
-                            </div>
-                          </div>
-                        </div>
-                        </li>
-                                                            
+            <group-box></group-box>
     </ul>
   </div>
   </div>
@@ -62,9 +35,16 @@
 </template>
 
 <script>
+
+import CONFIG from '../config';
+import groupBox from '../components/group-box';
+
 export default {
     mounted(){
         Materialize.showStaggeredList('#staggered-group-list');
+    }, 
+    components : {
+      'group-box' : groupBox,
     }
 }
 </script>

@@ -8,7 +8,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import 'materialize-css/dist/css/materialize.min.css';
 import jQuery from 'jquery/dist/jquery.js';
-import M from 'materialize-css/dist/js/materialize.min.js';
+import 'materialize-css/dist/js/materialize.min.js';
 
 Vue.config.productionTip = false
 

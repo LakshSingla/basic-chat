@@ -4,6 +4,8 @@ const groupControllers = require('../controllers/group-controllers');
 
 const router = express.Router();
 
+router.get('/my', groupControllers.myGroups);
+
 router.post('/new', groupControllers.newGroup);
 
 router.post('/:gid/join', groupControllers.joinGroup);

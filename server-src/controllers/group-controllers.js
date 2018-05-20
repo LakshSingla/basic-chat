@@ -7,6 +7,35 @@ const Message = require('../models/Message');
 const basicUtils = require('../utils/basicUtils');
 
 module.exports = {
+    myGroups(req, res){
+        const body = req.body;
+        User.findById(body.userID)
+            .populate('memberOfGroups')
+            .then(userDoc => {
+               console.log(userDoc);
+                if(!userDoc){
+                    return res.send({
+                        code : 'gpm1', 
+                        message : 'Given user doesnot exist in the database', 
+                        data: {}
+                    });
+                }
+                return res.send({
+                    code : 'gpm0', 
+                    message : 'User groups successfully queried', 
+                    data : {}
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                return res.send({
+                    code : 'gpm-1', 
+                    message : 'Unable to query the user database, unknown error encountered', 
+                    data : {}
+                });
+            });
+    },
+
     newGroup(req, res){
         const body = req.body;
         if(!basicUtils.hasProperties(body, ['name', 'password'])){
@@ -33,7 +62,7 @@ module.exports = {
                 .then(userDoc => res.status(200).send({
                     code : 'gpn0', 
                     message : 'New group created successfully', 
-                    data : { name: body.name, groupID : userDoc.groups[userDoc.groups.length - 1]}
+                    data : { name: body.name, groupID : userDoc.memberOfGroups[userDoc.memberOfGroups.length - 1]}
                 }))
                 .catch(err => {
                     try{
