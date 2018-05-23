@@ -4,8 +4,8 @@
         <div id="body-wrapper" class="valign-wrapper ">
             <div class="row" >
                 <ul class="tabs tabs-fixed-width tab-demo z-depth-1 col s10" >
-                    <li class="tab col s3"><a  href="#login">Login</a></li>
-                    <li class="tab col s3"><a class="active" href="#register">Register</a></li>
+                    <li class="tab col s3"><a href="#login">Login</a></li>
+                    <li class="tab col s3"><a href="#register">Register</a></li>
                 </ul>
             </div>
             <div id="login">
@@ -52,7 +52,7 @@ import axios from 'axios';
 import CONFIG from '../config';
 
 import 'materialize-css/dist/css/materialize.min.css';
-import jQuery from 'jquery/dist/jquery.js';
+import $ from 'jquery/dist/jquery.js';
 // import Materialie from 'materialize-css/dist/js/materialize.js';
 
 export default {
@@ -160,6 +160,12 @@ export default {
         // window.onresize = function(){
             // heading.style.left = (document.documentElement.clientWidth - heading.getBoundingClientRect().width)/2 + "px";
         // }
+        this.$router.push('/');
+        $('.collapsible').collapsible();
+        $('ul .tabs').tabs();
+        $('#login').click(ev => false);
+        $('#register').click(ev => false);
+
     }
 }
 </script>

@@ -1,5 +1,8 @@
 <template>
 <div style="overflow-x: hidden;">
+  <div class="progress" style="position: absolute; top: 0px" :style="{display: displayLoader}">
+      <div class="indeterminate"></div>
+  </div>
 <div class="container" id="body-wrapper">
   <div class="col s12 ">
     <h2 class="header">Groups</h2>
@@ -9,14 +12,8 @@
   </div>
   </div>
 
+  <!-- ADD GROUP MODAL -->
   <div id="modal1" class="modal" style="padding : 5px;">
-    <!-- <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div> -->
     <div class="row">
     <form class="col s12">
       <div class="row">
@@ -32,34 +29,33 @@
           <label for="password">Password</label>
         </div>
       </div>
+      <a class="waves-effect waves-light btn">CREATE</a>
     </form>
   </div>
   </div>
-  <div class="fixed-action-btn ">
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-    <!-- <a class="waves-effect waves-light btn modal-trigger" 
-       data-target="create-group-modal"
-       @click="openModal('create-group-modal')"
-       name="create-group-modal">Modal</a>
-    <a class="btn-floating btn-large red" href="#create-group-modal">
-      <i class="large material-icons">mode_edit</i>
-    </a> -->
-      <!-- <ul> -->
-        <!-- <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li> -->
-        <!-- <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li> -->
-        <!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li> -->
-        <!-- <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> -->
-      <!-- </ul> -->
-      <!-- <div id="create-group-modal" class="modal bottom-sheet">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
-      </div> -->
+
+  <!-- LOGOUT MODAL -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Confirmation</h4>
+      <p>Are you sure you want to logout?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" @click="logout()">Yes</a>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
   </div>
+
+   <div class="fixed-action-btn click-to-toggle">
+  <a class="btn-floating btn-large purple">
+    <i class="large material-icons">menu</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red modal-trigger" href="#modal2"><i class="material-icons">exit_to_app</i></a></li>
+    <li><a class="btn-floating blue"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating green modal-trigger" href="#modal1"><i class="material-icons">create</i></a></li>
+  </ul>
+</div>
 
 </div>
   
@@ -81,12 +77,13 @@ export default {
     data(){
       return {
         groupList : [],
+        displayLoader: 'block',
       }
     },
     mounted(){
       console.log('Mounted the dom');
       $('.modal').modal();
-      $('.modal-trigger').leanModal(); // setTimeout(() => Materialize.showStaggeredList('#staggered-group-list'), 1 );
+      // $('.modal-trigger').leanModal(); // setTimeout(() => Materialize.showStaggeredList('#staggered-group-list'), 1 );
     }, 
     components : {
       'group-box' : groupBox,
@@ -111,11 +108,20 @@ export default {
           // console.log('Fetched the data');
           // console.log('Showing the staggered list');
           ;
-        }).then(() => Materialize.showStaggeredList('#staggered-group-list'));
+        }).then(() => {
+          Materialize.showStaggeredList('#staggered-group-list')
+          this.displayLoader = 'none';
+        });
         // setTimeout(() => console.log(that.groupList[0].name), 1000);
       }, 
-      openModal(elId){
-        $(`#${elId}`).openModal();
+      logout(){
+        try{
+          localStorage.removeItem(CONFIG.LOCALSTORAGE_PATH);
+        }catch(e){
+
+        }finally{
+          this.$router.push('/');
+        }
       }
     }
 }
@@ -140,5 +146,3 @@ html, body{
 
 
 </style>
-
-

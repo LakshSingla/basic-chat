@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 //IMPORTING USER FILES
 const config = require('./config');
@@ -27,6 +28,8 @@ mongoose.connect(`${config.DB_URI}/${config.DB_NAME}`)
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+
+app.use('/', express.static(path.join(__dirname, '../client-src/dist')));
 
 app.use('/', authRouters);
 
