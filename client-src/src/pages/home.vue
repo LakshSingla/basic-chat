@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="overflow-x: hidden;">
 <div class="container" id="body-wrapper">
   <div class="col s12 ">
     <h2 class="header">Groups</h2>
@@ -8,18 +8,32 @@
     </ul>
   </div>
   </div>
-   <!-- Modal Trigger -->
-  
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
+  <div id="modal1" class="modal" style="padding : 5px;">
+    <!-- <div class="modal-content">
       <h4>Modal Header</h4>
       <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+    </div> -->
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+        
+        <div class="input-field col s12">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+    </form>
+  </div>
   </div>
   <div class="fixed-action-btn ">
     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
@@ -116,9 +130,14 @@ html, body{
   overflow-x: hidden;
 }
 
- .staggered-group-item{
+.staggered-group-item{
   opacity: 0;
 } 
+
+.input-field{
+  max-width: 500px !important;
+}
+
 
 </style>
 
