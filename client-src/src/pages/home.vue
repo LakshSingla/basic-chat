@@ -12,12 +12,12 @@
   </div>
   </div>
 
-  <!-- ADD GROUP MODAL -->
-  <div id="modal1" class="modal" style="padding : 5px;">
+  <!-- CREATE GROUP MODAL -->
+  <div id="modal1" class="modal" style="padding : 5px; padding-top: 20px;">
     <div class="row">
     <form class="col s12">
       <div class="row">
-        
+        <h4>Create Group</h4>
         <div class="input-field col s12">
           <input id="last_name" type="text" class="validate">
           <label for="last_name">Last Name</label>
@@ -35,7 +35,7 @@
   </div>
 
   <!-- LOGOUT MODAL -->
-  <div id="modal2" class="modal">
+  <div id="modal3" class="modal">
     <div class="modal-content">
       <h4>Confirmation</h4>
       <p>Are you sure you want to logout?</p>
@@ -46,13 +46,38 @@
     </div>
   </div>
 
+  <!-- JOIN GROUP MODAL -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Join Group</h4>
+      <p>A bunch of text</p>
+       <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+    </div>
+    <!-- <div class="modal-footer"> -->
+      <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+    <!-- </div> -->
+  </div>
+
    <div class="fixed-action-btn click-to-toggle">
   <a class="btn-floating btn-large purple">
     <i class="large material-icons">menu</i>
   </a>
   <ul>
-    <li><a class="btn-floating red modal-trigger" href="#modal2"><i class="material-icons">exit_to_app</i></a></li>
-    <li><a class="btn-floating blue"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating red modal-trigger" href="#modal3"><i class="material-icons">exit_to_app</i></a></li>
+    <li><a class="btn-floating blue btn modal-trigger" href="#modal2"><i class="material-icons">add</i></a></li>
     <li><a class="btn-floating green modal-trigger" href="#modal1"><i class="material-icons">create</i></a></li>
   </ul>
 </div>
@@ -78,11 +103,59 @@ export default {
       return {
         groupList : [],
         displayLoader: 'block',
+        allGroups :[
+        {
+            "_id": "5afd7f3f1df5c35ae624648a",
+            "name": "Test",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5afd82b14b83565ce67c55ba",
+            "name": "Test2",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5afd964ff027476733ab623b",
+            "name": "Test3",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5afd9666f027476733ab623c",
+            "name": "Test4",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5afda192860ec26a30edc827",
+            "name": "Test5",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5b011546628aea6532729166",
+            "name": "Test6",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5b0115d3b949e3659db76718",
+            "name": "Test7",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5b01378a11915073be89b75a",
+            "name": "Test8",
+            "noOfUsers": 1
+        },
+        {
+            "_id": "5b0175f211915073be89b75b",
+            "name": "Test9",
+            "noOfUsers": 1
+        }
+        ]
       }
     },
     mounted(){
       console.log('Mounted the dom');
       $('.modal').modal();
+      $('.collapsible').collapsible();
       // $('.modal-trigger').leanModal(); // setTimeout(() => Materialize.showStaggeredList('#staggered-group-list'), 1 );
     }, 
     components : {
