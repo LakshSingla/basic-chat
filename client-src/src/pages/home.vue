@@ -50,21 +50,26 @@
   <div id="modal2" class="modal">
     <div class="modal-content">
       <h4>Join Group</h4>
-      <p>A bunch of text</p>
        <ul class="collapsible">
-    <li>
-      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-  </ul>
+          <li v-for="(group,index) in allGroups" :key="index">
+            <div class="collapsible-header"> {{group.name}} </div>
+            <div class="collapsible-body">  
+              <div class="input-field col s12">
+                <input id="password" type="password" class="validate" v-model="allGroupsPassword[index]">
+                <label for="password" >Password</label>
+                <a class="waves-effect waves-light btn" @click="joinGroup(group._id, allGroupsPassword[index])">JOIN</a>
+              </div>
+            </div>
+          </li>
+          <!-- <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li> -->
+        </ul>
     </div>
     <!-- <div class="modal-footer"> -->
       <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
@@ -103,6 +108,7 @@ export default {
       return {
         groupList : [],
         displayLoader: 'block',
+        allGroupsPassword : [],
         allGroups :[
         {
             "_id": "5afd7f3f1df5c35ae624648a",
@@ -178,9 +184,6 @@ export default {
         }).then(response => {
           const data = response.data;
           this.groupList = data.data;
-          // console.log('Fetched the data');
-          // console.log('Showing the staggered list');
-          ;
         }).then(() => {
           Materialize.showStaggeredList('#staggered-group-list')
           this.displayLoader = 'none';
@@ -195,6 +198,19 @@ export default {
         }finally{
           this.$router.push('/');
         }
+      }, 
+      joinGroup(gid, pass){
+        axios.request({
+          method: 'post', 
+          url : `${CONFIG.API_URI}/group/${gid}/join`, 
+          headers : {
+            'Access-Control-Allow-Origin' : '*', 
+            'x-chat-token' : localStorage.getItem(CONFIG.LOCALSTORAGE_PATH)
+          }, 
+          data : {
+            password : pass
+          }
+        }).then(response => console.log(response))
       }
     }
 }
